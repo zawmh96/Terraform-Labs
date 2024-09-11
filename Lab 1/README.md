@@ -12,7 +12,8 @@
    4. [Step 4: Initialize Terraform and apply the Configuration](#step-4-initialize-terraform-and-apply-the-configuration)
    5. [Step 5: Check the state file stored in S3 bucket](#step-5-check-the-state-file-stored-in-S3-bucket)
    6. [Step 6: Add DynamoDB in Terraform Backend](#step-6-add-dynamodb-in-terraform-backend)
-   7. [Step 7: Validate State lock](#step-7-validate-state-lock)
+   7. [Step 7: Reinitialize Terraform and apply the Configuration](#step-7-reinitialize-terraform-and-apply-the-configuration)
+   8. [Step 8: Validate State lock](#step-8-validate-state-lock)
 5. [Conclusion](#conclusion)
 
 ---
@@ -89,7 +90,9 @@ Use AWS CLI or GUI to check the state files in S3 bucket.
 
 ### Step 6: Add DynamoDB in Terraform Backend
 
-### Step 7: Validate State lock
+### Step 7: Reinitialize Terraform and apply the Configuration
+
+### Step 8: Validate State lock
 
 ---
 ### Conclusion
