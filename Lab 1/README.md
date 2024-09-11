@@ -87,8 +87,9 @@ terraform apply
 ### Step 5: Check the state file stored in S3 bucket
 Use AWS CLI or GUI to check the state files in S3 bucket.
 
-### Cleaning Up Resources
-After completing the lab, clean up the resources to avoid incurring charges. Use the following command to destroy the resources:
-```
-terraform destroy
-```
+### Step 6: Add DynamoDB in Terraform Backend
+
+### Step 7: Validate State lock
+
+---
+### Conclusion
