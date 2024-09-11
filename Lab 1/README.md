@@ -12,8 +12,7 @@
    1. [Step 1: Create S3 Bucket with version enable](#step-1-create-s3-bucket-with-version-enable)
    2. [Step 2: Create DynamoDB Table](#step-3-create-dynamodb-table)
    4. [Step 3: Configure Terraform Backend](#step-3-configure-terraform-backend)
-   5. [Step 4: Initialize Terraform](#step-4-initialize-terraform)
-   6. [Step 5: Apply the Configuration](#step-5-apply-the-configuration)
+   5. [Step 4: Initialize Terraform and apply the Configuration](#step-4-initialize-terraform-and-apply-the-configuration)
 6. [Cleaning Up Resources](#cleaning-up-resources)
 7. [IAM Permissions](#iam-permissions)
 8. [Conclusion](#conclusion)
@@ -62,10 +61,10 @@ Use the AWS CLI or the AWS console to create an S3 bucket for storing the Terraf
 Enable versioning for the S3 bucket to maintain a history of the state file. This ensures you can roll back to a previous version if needed.
 ```
 # Create the S3 bucket
-aws s3api create-bucket --bucket <your-bucket-name> --region <your-region> --create-bucket-configuration LocationConstraint=<your-region>
+aws s3api create-bucket --bucket terraform-state-s3-12301 --region ap-northeast-1 --create-bucket-configuration LocationConstraint=ap-northeast-1
 
 # Enable versioning on the bucket
-aws s3api put-bucket-versioning --bucket <your-bucket-name> --versioning-configuration Status=Enabled
+aws s3api put-bucket-versioning --bucket terraform-state-s3-12301 --versioning-configuration Status=Enabled
 ```
 
 ### Step 2: Create DynamoDB Table
@@ -73,7 +72,7 @@ aws s3api put-bucket-versioning --bucket <your-bucket-name> --versioning-configu
 Create a DynamoDB table with a primary key of `LockID` to store the lock information for Terraform. This will prevent multiple users from modifying the same state at once.
 ```
 aws dynamodb create-table \
-    --table-name <your-dynamodb-table-name> \
+    --table-name terraform-state-locks \
     --attribute-definitions AttributeName=LockID,AttributeType=S \
     --key-schema AttributeName=LockID,KeyType=HASH \
     --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
@@ -87,24 +86,19 @@ Update your `main.tf` file to include the following backend configuration:
 ```hcl
 terraform {
   backend "s3" {
-    bucket         = "your-s3-bucket-name"
-    key            = "terraform/state"
+    bucket         = "terraform-state-s3-12301"
+    key            = "terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "terraform-locks"
+    dynamodb_table = "terraform-state-locks"
     encrypt        = true
   }
 }
 ```
 
-### Step 4: Initialize Terraform
-Run the following command to initialize the backend:
+### Step 4: Initialize Terraform and Apply the Configuration
+Run the following command to initialize the backend and apply the Terraform configuration to create and manage the backend resources:
 ```
 terraform init
-```
-
-### Step 5: Apply the Configuration
-Apply the Terraform configuration to create and manage the backend resources:
-```
 terraform apply
 ```
 
