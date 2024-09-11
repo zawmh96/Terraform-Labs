@@ -108,7 +108,7 @@ terraform {
 ```
 
 ### Step 7: Reinitialize Terraform and apply the Configuration
-Make a chages in local random string before apply the configuration
+Make a chages in local random string before apply the configuration.  
 Run the following command to reinitialize the backend and apply the Terraform configuration to create and manage the backend resources and as well in DynamoDB table:
 
 ```
