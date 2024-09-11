@@ -7,7 +7,7 @@
 3. [Architecture Overview](#architecture-overview)
 4. [Setup Instructions](#setup-instructions)
    1. [Step 1: Create S3 Bucket with version enable](#step-1-create-s3-bucket-with-version-enable)
-   2. [Step 2: Create DynamoDB Table](#step-3-create-dynamodb-table)
+   2. [Step 2: Create DynamoDB Table](#step-2-create-dynamodb-table)
    3. [Step 3: Configure Terraform Backend with S3](#step-3-configure-terraform-backend-with-s3)
    4. [Step 4: Initialize Terraform and apply the Configuration](#step-4-initialize-terraform-and-apply-the-configuration)
    5. [Step 5: Check the state file stored in S3 bucket](#step-5-check-the-state-file-stored-in-S3-bucket)
@@ -84,11 +84,16 @@ Run the following command to initialize the backend and apply the Terraform conf
 terraform init
 terraform apply
 ```
+![image](https://github.com/user-attachments/assets/14a797de-4266-4010-b462-cf2b805469bf)
+
 
 ### Step 5: Check the state file stored in S3 bucket
 Use AWS CLI or GUI to check the state files in S3 bucket.
 
-### Step 6: Add DynamoDB in Terraform Backend
+![image](https://github.com/user-attachments/assets/ada34f33-0309-430c-85a7-2a422d71e55f)
+
+
+### Step 6: Add DynamoDB in Terraform Backend for state lock
 
 ### Step 7: Reinitialize Terraform and apply the Configuration
 
