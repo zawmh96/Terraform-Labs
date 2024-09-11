@@ -11,9 +11,9 @@
 5. [Setup Instructions](#setup-instructions)
    1. [Step 1: Create S3 Bucket with version enable](#step-1-create-s3-bucket-with-version-enable)
    2. [Step 2: Create DynamoDB Table](#step-3-create-dynamodb-table)
-   4. [Step 3: Configure Terraform Backend](#step-4-configure-terraform-backend)
-   5. [Step 4: Initialize Terraform](#step-5-initialize-terraform)
-   6. [Step 5: Apply the Configuration](#step-6-apply-the-configuration)
+   4. [Step 3: Configure Terraform Backend](#step-3-configure-terraform-backend)
+   5. [Step 4: Initialize Terraform](#step-4-initialize-terraform)
+   6. [Step 5: Apply the Configuration](#step-5-apply-the-configuration)
 6. [Cleaning Up Resources](#cleaning-up-resources)
 7. [IAM Permissions](#iam-permissions)
 8. [Conclusion](#conclusion)
@@ -68,7 +68,7 @@ aws s3api create-bucket --bucket <your-bucket-name> --region <your-region> --cre
 aws s3api put-bucket-versioning --bucket <your-bucket-name> --versioning-configuration Status=Enabled
 ```
 
-### Step 3: Create DynamoDB Table
+### Step 2: Create DynamoDB Table
 
 Create a DynamoDB table with a primary key of `LockID` to store the lock information for Terraform. This will prevent multiple users from modifying the same state at once.
 ```
@@ -80,7 +80,7 @@ aws dynamodb create-table \
     --region <your-region>
 ```
 
-### Step 4: Configure Terraform Backend
+### Step 3: Configure Terraform Backend
 
 Update your `main.tf` file to include the following backend configuration:
 
@@ -96,13 +96,13 @@ terraform {
 }
 ```
 
-### Step 5: Initialize Terraform
+### Step 4: Initialize Terraform
 Run the following command to initialize the backend:
 ```
 terraform init
 ```
 
-### Step 6: Apply the Configuration
+### Step 5: Apply the Configuration
 Apply the Terraform configuration to create and manage the backend resources:
 ```
 terraform apply
