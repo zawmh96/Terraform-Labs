@@ -9,12 +9,11 @@
    - [S3 Backend](#s3-backend)
    - [DynamoDB State Locking](#dynamodb-state-locking)
 5. [Setup Instructions](#setup-instructions)
-   1. [Step 1: Create S3 Bucket](#step-1-create-s3-bucket)
-   2. [Step 2: Enable S3 Versioning](#step-2-enable-s3-versioning)
-   3. [Step 3: Create DynamoDB Table](#step-3-create-dynamodb-table)
-   4. [Step 4: Configure Terraform Backend](#step-4-configure-terraform-backend)
-   5. [Step 5: Initialize Terraform](#step-5-initialize-terraform)
-   6. [Step 6: Apply the Configuration](#step-6-apply-the-configuration)
+   1. [Step 1: Create S3 Bucket with version enable](#step-1-create-s3-bucket-with-version-enable)
+   2. [Step 2: Create DynamoDB Table](#step-3-create-dynamodb-table)
+   4. [Step 3: Configure Terraform Backend](#step-4-configure-terraform-backend)
+   5. [Step 4: Initialize Terraform](#step-5-initialize-terraform)
+   6. [Step 5: Apply the Configuration](#step-6-apply-the-configuration)
 6. [Cleaning Up Resources](#cleaning-up-resources)
 7. [IAM Permissions](#iam-permissions)
 8. [Conclusion](#conclusion)
@@ -57,17 +56,29 @@ DynamoDB is used to lock the state file, preventing multiple users from making c
 
 ## Setup Instructions
 
-### Step 1: Create S3 Bucket
+### Step 1: Create S3 Bucket with version enable
 
 Use the AWS CLI or the AWS console to create an S3 bucket for storing the Terraform state file. Make sure the bucket has a unique name globally.
-
-### Step 2: Enable S3 Versioning
-
 Enable versioning for the S3 bucket to maintain a history of the state file. This ensures you can roll back to a previous version if needed.
+```
+# Create the S3 bucket
+aws s3api create-bucket --bucket <your-bucket-name> --region <your-region> --create-bucket-configuration LocationConstraint=<your-region>
+
+# Enable versioning on the bucket
+aws s3api put-bucket-versioning --bucket <your-bucket-name> --versioning-configuration Status=Enabled
+```
 
 ### Step 3: Create DynamoDB Table
 
 Create a DynamoDB table with a primary key of `LockID` to store the lock information for Terraform. This will prevent multiple users from modifying the same state at once.
+```
+aws dynamodb create-table \
+    --table-name <your-dynamodb-table-name> \
+    --attribute-definitions AttributeName=LockID,AttributeType=S \
+    --key-schema AttributeName=LockID,KeyType=HASH \
+    --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
+    --region <your-region>
+```
 
 ### Step 4: Configure Terraform Backend
 
