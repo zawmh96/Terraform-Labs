@@ -94,10 +94,37 @@ Use AWS CLI or GUI to check the state files in S3 bucket.
 
 
 ### Step 6: Add DynamoDB in Terraform Backend for state lock
+Update your `main.tf` file to include dynamoDB table in the backend configuration:
+```hcl
+terraform {
+  backend "s3" {
+    bucket         = "terraform-state-s3-12301"
+    key            = "terraform.tfstate"
+    region         = "ap-northeast-1"
+    encrypt        = true
+    dynamodb_table = "terraform-state-locks" #Add this line for state lock
+  }
+}
+```
 
 ### Step 7: Reinitialize Terraform and apply the Configuration
+Make a chages in local random string before apply the configuration
+Run the following command to reinitialize the backend and apply the Terraform configuration to create and manage the backend resources and as well in DynamoDB table:
 
-### Step 8: Validate State lock
+```
+terraform init
+terraform apply
+```
+
+![image](https://github.com/user-attachments/assets/f74a60fe-d95b-4261-9340-49b4867087c0)
+
+
+### Step 8: Check the latest state file stored in S3 bucket and items in DynamoDB table
+
+![image](https://github.com/user-attachments/assets/14401408-6940-4622-8ced-491b1468b7cc)
+
+
+![image](https://github.com/user-attachments/assets/d9208737-1a20-4c46-8846-3fc7fa936c52)
 
 ---
 ### Conclusion
