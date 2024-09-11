@@ -5,17 +5,15 @@
 1. [Introduction](#introduction)
 2. [Prerequisites](#prerequisites)
 3. [Architecture Overview](#architecture-overview)
-4. [Terraform Backend Configuration](#terraform-backend-configuration)
-   - [S3 Backend](#s3-backend)
-   - [DynamoDB State Locking](#dynamodb-state-locking)
-5. [Setup Instructions](#setup-instructions)
+4. [Setup Instructions](#setup-instructions)
    1. [Step 1: Create S3 Bucket with version enable](#step-1-create-s3-bucket-with-version-enable)
    2. [Step 2: Create DynamoDB Table](#step-3-create-dynamodb-table)
-   4. [Step 3: Configure Terraform Backend](#step-3-configure-terraform-backend)
-   5. [Step 4: Initialize Terraform and apply the Configuration](#step-4-initialize-terraform-and-apply-the-configuration)
-6. [Cleaning Up Resources](#cleaning-up-resources)
-7. [IAM Permissions](#iam-permissions)
-8. [Conclusion](#conclusion)
+   3. [Step 3: Configure Terraform Backend with S3](#step-3-configure-terraform-backend-with-s3)
+   4. [Step 4: Initialize Terraform and apply the Configuration](#step-4-initialize-terraform-and-apply-the-configuration)
+   5. [Step 5: Check the state file stored in S3 bucket](#step-5-check-the-state-file-stored-in-S3-bucket)
+   6. [Step 6: Add DynamoDB in Terraform Backend](#step-6-add-dynamodb-in-terraform-backend)
+   7. [Step 7: Validate State lock](#step-7-validate-state-lock)
+5. [Conclusion](#conclusion)
 
 ---
 
@@ -38,21 +36,6 @@ In this lab, we will configure a Terraform backend using **S3** to store the sta
 The Terraform backend uses an **S3 bucket** to store the Terraform state files, while **DynamoDB** is used to provide state locking, ensuring that only one process can modify the state at a time.
 
 ---
-
-## Terraform Backend Configuration
-
-This section explains how to configure the S3 bucket and DynamoDB for Terraform backend storage.
-
-### S3 Backend
-
-The S3 bucket stores the Terraform state files. The state file holds the current state of the resources managed by Terraform, and storing it remotely allows for collaboration across teams.
-
-### DynamoDB State Locking
-
-DynamoDB is used to lock the state file, preventing multiple users from making changes to the infrastructure at the same time.
-
----
-
 ## Setup Instructions
 
 ### Step 1: Create S3 Bucket with version enable
@@ -76,10 +59,10 @@ aws dynamodb create-table \
     --attribute-definitions AttributeName=LockID,AttributeType=S \
     --key-schema AttributeName=LockID,KeyType=HASH \
     --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 \
-    --region <your-region>
+    --region ap-northeast-1
 ```
 
-### Step 3: Configure Terraform Backend
+### Step 3: Configure Terraform Backend with S3
 
 Update your `main.tf` file to include the following backend configuration:
 
@@ -88,8 +71,7 @@ terraform {
   backend "s3" {
     bucket         = "terraform-state-s3-12301"
     key            = "terraform.tfstate"
-    region         = "us-east-1"
-    dynamodb_table = "terraform-state-locks"
+    region         = "ap-northeast-1"
     encrypt        = true
   }
 }
@@ -101,6 +83,9 @@ Run the following command to initialize the backend and apply the Terraform conf
 terraform init
 terraform apply
 ```
+
+### Step 5: Check the state file stored in S3 bucket
+Use AWS CLI or GUI to check the state files in S3 bucket.
 
 ### Cleaning Up Resources
 After completing the lab, clean up the resources to avoid incurring charges. Use the following command to destroy the resources:
