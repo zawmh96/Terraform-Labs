@@ -127,22 +127,14 @@ terraform apply
 ![image](https://github.com/user-attachments/assets/d9208737-1a20-4c46-8846-3fc7fa936c52)
 
 ### Step 9: Validate the state lock for preventing any concurrent operations.
-Add below in main.tf to keep run and sleep for 60 seconds.  
-```hcl
-resource "null_resource" "test_lock" {
-  provisioner "local-exec" {
-    command = "sleep 60"
-  }
-  triggers = {
-    always_run = "${timestamp()}"
-  }
-}
-```
 
 Make a change in length from 10 to 20 and apply the configuration from one terminal.   
 While runing in the terminal, make another change and apply it at another terminal.  
+
+You will not able to apply in second terminal as the state is in lock.
 
 ![image](https://github.com/user-attachments/assets/889a50ba-6d64-4ee2-a5ca-0e113360da47)
 
 ---
 ### Conclusion
+By the end of this lab, you will have successfully configured a remote backend for Terraform using S3 and DynamoDB for state locking. This configuration ensures collaboration and consistency across your infrastructure deployments.
