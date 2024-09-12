@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/1a52540f-93a4-47f7-b163-e0161647ae8f)![image](https://github.com/user-attachments/assets/1a52540f-93a4-47f7-b163-e0161647ae8f)# Lab 1: Terraform Backend with S3 and DynamoDB
+# Lab 1: Terraform Backend with S3 and DynamoDB
 
 ## Table of Contents
 
