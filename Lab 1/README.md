@@ -123,6 +123,7 @@ terraform apply
 
 
 ### Step 8: Check the latest state file stored in S3 bucket and items in DynamoDB table
+With Version enable on S3, we can see multiple old versions in the bucket.
 
 ![image](https://github.com/user-attachments/assets/14401408-6940-4622-8ced-491b1468b7cc)
 
