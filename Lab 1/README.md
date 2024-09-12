@@ -13,7 +13,8 @@
    5. [Step 5: Check the state file stored in S3 bucket](#step-5-check-the-state-file-stored-in-S3-bucket)
    6. [Step 6: Add DynamoDB in Terraform Backend](#step-6-add-dynamodb-in-terraform-backend)
    7. [Step 7: Reinitialize Terraform and apply the Configuration](#step-7-reinitialize-terraform-and-apply-the-configuration)
-   8. [Step 8: Validate State lock](#step-8-validate-state-lock)
+   8. [Step 8: Check the latest state file stored in S3 bucket and items in DynamoDB table](#step-8-check-the-latest-state-file-stored-in-S3-bucket-and-items-in-dynamodb-table)
+   9. [Step 9: Validate the state lock for preventing any concurrent operations](#step-9-validate-the-state-lock-for-preventing-any-concurrent-operations)
 5. [Conclusion](#conclusion)
 
 ---
@@ -126,7 +127,7 @@ terraform apply
 
 ![image](https://github.com/user-attachments/assets/d9208737-1a20-4c46-8846-3fc7fa936c52)
 
-### Step 9: Validate the state lock for preventing any concurrent operations.
+### Step 9: Validate the state lock for preventing any concurrent operations
 
 Make a change in length from 10 to 20 and apply the configuration from one terminal.   
 While runing in the terminal, make another change and apply it at another terminal.  
