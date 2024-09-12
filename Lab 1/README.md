@@ -1,4 +1,4 @@
-# Lab 1: Terraform Backend with S3 and DynamoDB
+![image](https://github.com/user-attachments/assets/1a52540f-93a4-47f7-b163-e0161647ae8f)![image](https://github.com/user-attachments/assets/1a52540f-93a4-47f7-b163-e0161647ae8f)# Lab 1: Terraform Backend with S3 and DynamoDB
 
 ## Table of Contents
 
@@ -37,7 +37,7 @@ In this lab, we will configure a Terraform backend using **S3** to store the sta
 
 The Terraform backend uses an **S3 bucket** to store the Terraform state files, while **DynamoDB** is used to provide state locking, ensuring that only one process can modify the state at a time.
 
-![image](https://github.com/user-attachments/assets/1caff391-3f8b-49cf-ba85-6debbbbc51e6)
+![image](https://github.com/user-attachments/assets/b01cc15d-3544-401d-b629-fc0cfd1accb7)
 
 ---
 ## Setup Instructions
