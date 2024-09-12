@@ -7,10 +7,10 @@ terraform {
     key = "terraform.tfstate"
     encrypt = true
     profile  = "dev-programmatic-admin-role"
-    dynamodb_table = "terraform_state_lock"
+    dynamodb_table = "terraform-state-locks"
   }
 }
-
+#To test code changes
 locals {
   pod_id = lower("${var.pod_name}-${random_string.suffix.result}")
   rds_creds = {
@@ -29,6 +29,6 @@ resource "null_resource" "test_lock" {
     command = "sleep 60"
   }
   triggers = {
-    always_run = "${timestamp()}"
+    always_run = "${timestamp()}" #To keep it run every time the terraform code is run.
   }
 }
