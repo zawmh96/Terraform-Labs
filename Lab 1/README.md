@@ -11,7 +11,7 @@
    3. [Step 3: Configure Terraform Backend with S3](#step-3-configure-terraform-backend-with-s3)
    4. [Step 4: Initialize Terraform and apply the Configuration](#step-4-initialize-terraform-and-apply-the-configuration)
    5. [Step 5: Check the state file stored in S3 bucket](#step-5-check-the-state-file-stored-in-S3-bucket)
-   6. [Step 6: Add DynamoDB in Terraform Backend](#step-6-add-dynamodb-in-terraform-backend)
+   6. [Step 6: Add DynamoDB in Terraform Backend for state lock](#step-6-add-dynamodb-in-terraform-backend-for-state-lock)
    7. [Step 7: Reinitialize Terraform and apply the Configuration](#step-7-reinitialize-terraform-and-apply-the-configuration)
    8. [Step 8: Check the latest state file stored in S3 bucket and items in DynamoDB table](#step-8-check-the-latest-state-file-stored-in-S3-bucket-and-items-in-dynamodb-table)
    9. [Step 9: Validate the state lock for preventing any concurrent operations](#step-9-validate-the-state-lock-for-preventing-any-concurrent-operations)
