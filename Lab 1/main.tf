@@ -1,15 +1,3 @@
-
-terraform {
-  required_version = ">= 0.11.0"
-  backend "s3" {
-    bucket = "terraform-state-s3-12301"
-    region = "ap-northeast-1"
-    key = "terraform.tfstate"
-    encrypt = true
-    profile  = "dev-programmatic-admin-role"
-    dynamodb_table = "terraform-state-locks"
-  }
-}
 #To test code changes
 locals {
   pod_id = lower("${var.pod_name}-${random_string.suffix.result}")
