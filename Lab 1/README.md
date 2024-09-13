@@ -15,7 +15,7 @@
    7. [Step 7: Add DynamoDB in Terraform Backend for state lock](#step-7-add-dynamodb-in-terraform-backend-for-state-lock)
    8. [Step 8: Reinitialize Terraform and apply the Configuration](#step-8-reinitialize-terraform-and-apply-the-configuration)
    9. [Step 9: Check the latest state file stored in S3 bucket and items in DynamoDB table](#step-9-check-the-latest-state-file-stored-in-S3-bucket-and-items-in-dynamodb-table)
-   10. [Step 10: Validate the concurrent operation at the same time(After adding DynamoDB)](#step-10-validate-the-concurrent-operation-at-the-same-time-after-adding-dynamodb)
+   10. [Step 10: Validate the concurrent operation at the same time (After adding DynamoDB)](#step-10-validate-the-concurrent-operation-at-the-same-time-after-adding-dynamodb)
 5. [Conclusion](#conclusion)
 
 ---
