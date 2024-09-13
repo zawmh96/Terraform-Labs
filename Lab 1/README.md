@@ -115,6 +115,7 @@ terraform {
     region         = "ap-northeast-1"
     encrypt        = true
     dynamodb_table = "terraform-state-locks" #Add this line for state lock
+    profile        = "dev-programmatic-admin-role" # Use your AWS CLI profile
   }
 }
 ```
