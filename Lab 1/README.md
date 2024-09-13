@@ -12,10 +12,10 @@
    4. [Step 4: Initialize Terraform and apply the Configuration](#step-4-initialize-terraform-and-apply-the-configuration)
    5. [Step 5: Check the state file stored in S3 bucket](#step-5-check-the-state-file-stored-in-S3-bucket)
    6. [Step 6: Validate the concurrent operation at the same time](#step-6-validate-the-concurrent-operation-at-the-same-time)
-   7. [Step 7: Add DynamoDB in Terraform Backend for state lock](#step-6-add-dynamodb-in-terraform-backend-for-state-lock)
-   8. [Step 8: Reinitialize Terraform and apply the Configuration](#step-7-reinitialize-terraform-and-apply-the-configuration)
-   9. [Step 9: Check the latest state file stored in S3 bucket and items in DynamoDB table](#step-8-check-the-latest-state-file-stored-in-S3-bucket-and-items-in-dynamodb-table)
-   10. [Step 10: Validate the concurrent operation at the same time](step-10-validate-the-concurrent-operation-at-the-same-time)
+   7. [Step 7: Add DynamoDB in Terraform Backend for state lock](#step-7-add-dynamodb-in-terraform-backend-for-state-lock)
+   8. [Step 8: Reinitialize Terraform and apply the Configuration](#step-8-reinitialize-terraform-and-apply-the-configuration)
+   9. [Step 9: Check the latest state file stored in S3 bucket and items in DynamoDB table](#step-9-check-the-latest-state-file-stored-in-S3-bucket-and-items-in-dynamodb-table)
+   10. [Step 10: Validate the concurrent operation at the same time](#step-10-validate-the-concurrent-operation-at-the-same-time)
 5. [Conclusion](#conclusion)
 
 ---
