@@ -11,10 +11,11 @@
    3. [Step 3: Configure Terraform Backend with S3](#step-3-configure-terraform-backend-with-s3)
    4. [Step 4: Initialize Terraform and apply the Configuration](#step-4-initialize-terraform-and-apply-the-configuration)
    5. [Step 5: Check the state file stored in S3 bucket](#step-5-check-the-state-file-stored-in-S3-bucket)
-   6. [Step 6: Add DynamoDB in Terraform Backend for state lock](#step-6-add-dynamodb-in-terraform-backend-for-state-lock)
-   7. [Step 7: Reinitialize Terraform and apply the Configuration](#step-7-reinitialize-terraform-and-apply-the-configuration)
-   8. [Step 8: Check the latest state file stored in S3 bucket and items in DynamoDB table](#step-8-check-the-latest-state-file-stored-in-S3-bucket-and-items-in-dynamodb-table)
-   9. [Step 9: Validate the state lock for preventing any concurrent operations](#step-9-validate-the-state-lock-for-preventing-any-concurrent-operations)
+   6. [Step 6: Validate the concurrent operation at the same time](step-6-validate-the-concurrent-operation-at-the-same-time)
+   7. [Step 7: Add DynamoDB in Terraform Backend for state lock](#step-6-add-dynamodb-in-terraform-backend-for-state-lock)
+   8. [Step 8: Reinitialize Terraform and apply the Configuration](#step-7-reinitialize-terraform-and-apply-the-configuration)
+   9. [Step 9: Check the latest state file stored in S3 bucket and items in DynamoDB table](#step-8-check-the-latest-state-file-stored-in-S3-bucket-and-items-in-dynamodb-table)
+   10. [Step 10: Validate the concurrent operation at the same time](step-6-validate-the-concurrent-operation-at-the-same-time)
 5. [Conclusion](#conclusion)
 
 ---
@@ -77,6 +78,7 @@ terraform {
     key            = "terraform.tfstate"
     region         = "ap-northeast-1"
     encrypt        = true
+    profile        = "dev-programmatic-admin-role"  # Use your AWS CLI profile
   }
 }
 ```
@@ -95,8 +97,15 @@ Use AWS CLI or GUI to check the state files in S3 bucket.
 
 ![image](https://github.com/user-attachments/assets/ada34f33-0309-430c-85a7-2a422d71e55f)
 
+### Step 6: Validate the concurrent operation at the same time
+Make a change in length terraform local code and apply the configuration from one terminal.   
+While runing in the terminal, make another change and apply it at another terminal.  
 
-### Step 6: Add DynamoDB in Terraform Backend for state lock
+You will able to make a changes in second terminal as S3 don't provide state lock feature.
+
+![image](https://github.com/user-attachments/assets/e61ba969-fcc4-4f69-a429-d8fad9bccb80)
+
+### Step 7: Add DynamoDB in Terraform Backend for state lock
 Update your `main.tf` file to include dynamoDB table in the backend configuration:
 ```hcl
 terraform {
@@ -110,7 +119,7 @@ terraform {
 }
 ```
 
-### Step 7: Reinitialize Terraform and apply the Configuration
+### Step 8: Reinitialize Terraform and apply the Configuration
 Make a chages in local random string before apply the configuration.  
 Run the following command to reinitialize the backend and apply the Terraform configuration to create and manage the backend resources and as well in DynamoDB table:
 
@@ -122,7 +131,7 @@ terraform apply
 ![image](https://github.com/user-attachments/assets/f74a60fe-d95b-4261-9340-49b4867087c0)
 
 
-### Step 8: Check the latest state file stored in S3 bucket and items in DynamoDB table
+### Step 9: Check the latest state file stored in S3 bucket and items in DynamoDB table
 With Version enable on S3, we can see multiple old versions in the bucket.
 
 ![image](https://github.com/user-attachments/assets/14401408-6940-4622-8ced-491b1468b7cc)
@@ -130,12 +139,12 @@ With Version enable on S3, we can see multiple old versions in the bucket.
 
 ![image](https://github.com/user-attachments/assets/d9208737-1a20-4c46-8846-3fc7fa936c52)
 
-### Step 9: Validate the state lock for preventing any concurrent operations
+### Step 10: Validate the concurrent operation at the same time(After adding DynamoDB)
 
-Make a change in length from 10 to 20 and apply the configuration from one terminal.   
+Make a change in length terraform local code and apply the configuration from one terminal.   
 While runing in the terminal, make another change and apply it at another terminal.  
 
-You will not able to apply in second terminal as the state is in lock.
+You will NOT able to apply in second terminal as the state is in lock.
 
 ![image](https://github.com/user-attachments/assets/889a50ba-6d64-4ee2-a5ca-0e113360da47)
 
