@@ -125,11 +125,11 @@ Make a chages in local random string before apply the configuration.
 Run the following command to reinitialize the backend and apply the Terraform configuration to create and manage the backend resources and as well in DynamoDB table:
 
 ```
-terraform init -migrate-state
+terraform init -reconfigure
 terraform apply
 ```
 
-![image](https://github.com/user-attachments/assets/f74a60fe-d95b-4261-9340-49b4867087c0)
+![image](https://github.com/user-attachments/assets/c73f09f6-b5e7-4dac-85e1-37d99a534b53)
 
 
 ### Step 9: Check the latest state file stored in S3 bucket and items in DynamoDB table
