@@ -11,8 +11,9 @@
    - [TLS Private Key Resource](#tls-private-key-resource)
    - [AWS Key Pair Resource](#aws-key-pair-resource)
    - [Local File Resource](#local-file-resource)
-5. [Setup Instructions](#setup-instructions)
-6. [Conclusion](#conclusion)
+5. [Terrafrom Function Explanation](#terraform-function-explanation)
+6. [Setup Instructions](#setup-instructions)
+7. [Conclusion](#conclusion)
 
 ---
 
@@ -100,6 +101,14 @@ resource "local_file" "private_key" {
 ```
 - local_file.private_key: Saves the private key locally in the ***generated/*** folder with restricted permissions.<br>
 - local-exec provisioner: Sets the file permissions to 400, restricting access to the owner.
+
+---
+## Terrafrom Function Explanation
+
+**lower()**: This function converts the entire string to lowercase. <br>
+**merge()**: This function merges several tag maps.<br>
+**Conditional Logic (? :)** : This is a shorthand ***if-else*** syntax used in Terraform.<br>
+  - It checks the value of var.create_ec2_ssh_keypair. If it is true, the count is set to 1, meaning the AWS Key Pair will be created. If false, the count is set to 0, and the resource won't be created.
 
 ---
 
