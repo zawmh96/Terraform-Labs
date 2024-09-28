@@ -11,7 +11,7 @@
    - [TLS Private Key Resource](#tls-private-key-resource)
    - [AWS Key Pair Resource](#aws-key-pair-resource)
    - [Local File Resource](#local-file-resource)
-5. [Terrafrom Function Explanation](#terraform-function-explanation)
+5. [Terraform Function Explanation](#terraform-function-explanation)
 6. [Setup Instructions](#setup-instructions)
 7. [Conclusion](#conclusion)
 
