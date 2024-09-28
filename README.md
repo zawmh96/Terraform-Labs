@@ -5,9 +5,8 @@
    - [Read more here](Lab1/README.md)
 
 1. **Lab 2 - AWS EC2 Key Pair Creation with Terraform**:
-   - In this lab, you'll configure a remote backend for Terraform using S3 to store the state file and DynamoDB for state locking. This ensures consistency and prevents concurrent operations.
+   - In this lab, you'll configure AWS EC2 Key pair using terraform. Pubilc key will be stored in AWS account and private key in locally.
    - [Read more here](Lab2/README.md)
-   - [Read more here](Lab1/README.md)
 
 
 ## How to Use This Repository
