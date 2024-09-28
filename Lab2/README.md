@@ -103,7 +103,7 @@ resource "local_file" "private_key" {
 - local-exec provisioner: Sets the file permissions to 400, restricting access to the owner.
 
 ---
-## Terrafrom Function Explanation
+## Terraform Function Explanation
 
 **lower()**: This function converts the entire string to lowercase. <br>
 **merge()**: This function merges several tag maps.<br>
