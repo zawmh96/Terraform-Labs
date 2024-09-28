@@ -79,8 +79,7 @@ resource "docker_container" "nginx-web" {
 
 ---
 
-### 4. Initialize and Apply terrform
-
+### 4. Initialize and Apply Terraform
 #### Initialize Terraform:
 
 Initialize the working directory and download the necessary providers:
