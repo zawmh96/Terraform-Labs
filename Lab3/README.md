@@ -9,11 +9,8 @@ This project demonstrates how to build a Docker image for an Nginx web server, p
   - [1. Build the Nginx Docker Image](#1-build-the-nginx-docker-image)
   - [2. Push the Image to Docker Hub](#2-push-the-image-to-docker-hub)
   - [3. Deploy the Docker Application Using Terraform](#3-deploy-the-docker-application-using-terraform)
-    - [Terraform Configuration](#create-a-terraform-configuration)
-    - [Initialize and Apply Terraform](#initialize-and-apply-terraform-configuration)
-- [Clean Up](#clean-up)
+  - [4. Initialize and Apply Terraform](#initialize-and-apply-terraform-configuration)
 - [Conclusion](#conclusion)
-- [References](#references)
 
 ## Prerequisites
 
@@ -108,5 +105,5 @@ Apply the Terraform configuration to create the key pair and save the private ke
 
 ---
 
-### Conclusion
+## Conclusion
 This project demonstrates how to build and deploy a Dockerized Nginx application using Docker and Terraform. By following these steps, you will have successfully created a Docker image, pushed it to Docker Hub, and deployed it using Terraform.
