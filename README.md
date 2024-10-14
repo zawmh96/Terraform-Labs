@@ -11,7 +11,10 @@
 3. **Lab 3 - Creating a Nginx Docker Image and Deploying Docker Application Using Terraform**:
    - In this lab, demonstrates how to build a Docker image for an Nginx web server, push the image to Docker Hub, and deploy a Docker application using Terraform.
    - [Read more here](Lab3/README.md)
-  
+
+4. **Lab 4 - How to deploy HAproxy with Docker Using Terraform**:
+   - In this lab, demonstrates how to deploy HAproxy with Docker using Terraform.
+   - [Read more here](Lab4/README.md)
 
 ## How to Use This Repository
 
