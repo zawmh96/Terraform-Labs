@@ -1,4 +1,4 @@
-# Deploy HAProxy with Docker using Terraform
+# How to deploy HAproxy with Docker Using Terraform
 
 This repository contains a Terraform configuration to deploy multiple HAProxy containers with Docker. The setup includes three web server containers and two HAProxy instances, with IPVS for load balancing between the HAProxy containers.
 
