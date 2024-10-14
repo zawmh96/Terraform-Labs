@@ -27,7 +27,7 @@ This repository contains a Terraform configuration to deploy multiple HAProxy co
 
 The architecture consists of three web server containers and two HAProxy containers that balance traffic between them. The HAProxy containers are configured with a Virtual IP (VIP) that routes incoming requests. Below is a diagram illustrating the setup:
 
-![image](https://github.com/user-attachments/assets/b59cd6a2-7bd6-4ba8-bf07-8b42d72f2cce)
+![image](https://github.com/user-attachments/assets/15cb1b86-d837-4b68-9e5e-89c22ab9952a)
 
 
 ## Configuration
