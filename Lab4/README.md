@@ -14,7 +14,8 @@ This repository contains a Terraform configuration to deploy multiple HAProxy co
      - [HAProxy Containers](#haproxy-containers)
      - [Virtual IP (VIP) Setup](#virtual-ip-vip-setup)
 4. [Initialize Terraform and Apply the code](#initialize-terraform-and-apply-the-code)
-5. [Accessing the Application](#accessing-the-application)
+5. [Check the docker containers and VIP configuration](#check-the-docker-containers-and-vip-configuration)
+6. [Accessing the Application](#accessing-the-application)
 
 ## Prerequisites
 
@@ -122,9 +123,49 @@ terrafrom plan
 terraform apply
 ```
 
+## Check the docker containers and VIP configuration
+```
+vagrant@hellocloud-native-box:~/haproxy$ docker ps
+CONTAINER ID   IMAGE                            COMMAND                  CREATED              STATUS              PORTS                                        NAMES
+a034a15e624c   haproxytech/haproxy-alpine:2.4   "/docker-entrypoint.…"   About a minute ago   Up About a minute   0.0.0.0:80->80/tcp, 0.0.0.0:8404->8404/tcp   haproxy1
+68b9edf99630   haproxytech/haproxy-alpine:2.4   "/docker-entrypoint.…"   About a minute ago   Up About a minute   0.0.0.0:81->80/tcp, 0.0.0.0:8405->8404/tcp   haproxy2
+7095f82cd0f9   hashicorp/http-echo              "/http-echo '-text=h…"   About a minute ago   Up About a minute   5678/tcp                                     web2
+7862adc251be   hashicorp/http-echo              "/http-echo '-text=h…"   About a minute ago   Up About a minute   5678/tcp                                     web3
+e0c7072e5a80   hashicorp/http-echo              "/http-echo '-text=h…"   About a minute ago   Up About a minute   5678/tcp                                     web1
+```
+
+```
+vagrant@hellocloud-native-box:~/haproxy$ sudo ipvsadm -l
+IP Virtual Server version 1.2.1 (size=4096)
+Prot LocalAddress:Port Scheduler Flags
+  -> RemoteAddress:Port           Forward Weight ActiveConn InActConn
+TCP  192.168.100.10:http rr
+  -> 172.19.0.5:http              Masq    1      0          0         
+  -> 172.19.0.6:http              Masq    1      0          0         
+```
+
 ## Accessing the Application
 
-Once the deployment is complete, you can access the web servers using the Virtual IP (VIP) configured with IPVS. The VIP is set to 192.168.100.10. Access the application by navigating to the following URL:
+Once the deployment is complete, you can access the web servers using the Virtual IP (VIP) configured with IPVS. The VIP is set to 192.168.100.10. Access the application by navigating in either broswer or CURL: http://192.168.100.10:80
 
-For load-balanced access, use http://192.168.100.10:80.  
 This VIP will distribute the incoming traffic among the available HAProxy containers (haproxy1 and haproxy2), which in turn balance the requests to the web servers (web1, web2, and web3). You should see responses from the web containers indicating which one handled the request.
+
+##### Test Output
+```
+vagrant@hellocloud-native-box:~/haproxy$ while true; do curl http://192.168.100.10:80; sleep 0.3; done;
+hello from web1
+hello from web2
+hello from web2
+hello from web3
+hello from web3
+hello from web1
+hello from web1
+hello from web2
+hello from web2
+hello from web3
+hello from web3
+hello from web1
+hello from web1
+hello from web2
+hello from web2
+```
