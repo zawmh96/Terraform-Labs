@@ -90,7 +90,7 @@ resource "docker_container" "haproxy1" {
     external = 8404
   }
   volumes {
-    host_path = "/home/vagrant/haproxy/share" #Make sure harpoxy.cfg file stored in share folder
+    host_path = "/home/vagrant/haproxy/share" #Make sure harpoxy.cfg file stored in the path folder
     container_path = "/usr/local/etc/haproxy"
     read_only = true
   }
